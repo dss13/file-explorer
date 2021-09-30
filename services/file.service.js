@@ -1,8 +1,10 @@
-import { promises as fs } from 'fs';
-import { platform } from 'os';
-import { spawn } from 'child_process';
+// import { promises as fs } from 'fs';
+// import { platform } from 'os';
+// import { spawn } from 'child_process';
 
-const fileService = {
+const {spawn} = require('child_process');
+
+module.exports = {
     read: async function(filePath) {
 
     },
@@ -21,5 +23,3 @@ const fileService = {
         });
     }
 }
-
-export default fileService;
