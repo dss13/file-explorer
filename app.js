@@ -3,8 +3,9 @@
 // import FileService from './services/file.service.js';
 // import {app, BrowserWindow} from 'electron';
 const {platform} = require('os');
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
+const folderService = require(path.join('/', __dirname, 'services/folder.service.js'))
 
 console.log(platform());
 
@@ -29,6 +30,12 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on('get-folder-content', async (event, arg) => {
+    console.log(arg) // prints "ping"
+    const data = await folderService.read(arg);
+    event.reply('update-folder-content', data);
 })
 
 // FileService.open('/Users/sumugan/tika-app-1.17.jar')

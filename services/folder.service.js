@@ -16,7 +16,8 @@ module.exports = {
             return ({
                 name: dir,
                 type: info.blocks ? 'File' : 'Folder',
-                size: info.size
+                size: info.size,
+                path: path.join('/', folderPath, dir)
             });
         }))
         return dirs;
